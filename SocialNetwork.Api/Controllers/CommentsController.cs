@@ -9,23 +9,19 @@ namespace SocialNetwork.Api.Controllers
 	[ApiController]
 	public class CommentsController : ControllerBase
 	{
-        private readonly SocialNetworkContext socialNetworkContext;
+        private readonly SocialNetworkContext context;
 
         public CommentsController(SocialNetworkContext socialNetworkContext)
         {
-            this.socialNetworkContext = socialNetworkContext;
+            this.context = socialNetworkContext;
         }
+
 		[HttpPost("posts/{postId}/comments")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult CreateComment([FromRoute]int postId, [FromBody]Comment comment)
 		{
-            var builder = new DbContextOptionsBuilder<SocialNetworkContext>()
-               .UseSqlite("DataSource=socialnetwork.db");
-            var context = new SocialNetworkContext(builder.Options);
-            context.Database.EnsureCreated();
-            socialNetworkContext.Database.EnsureCreated();
-            var post = socialNetworkContext.Posts.FirstOrDefault(x => x.Id == postId);
+            var post = context.Posts.FirstOrDefault(x => x.Id == postId);
             if (post is null)
             {
                 return BadRequest($"No se encontró un post con id {postId} para agregar el comentario");
@@ -42,6 +38,7 @@ namespace SocialNetwork.Api.Controllers
             }
 
             context.Comments.Add(comment);
+            context.SaveChanges();
             return new CreatedAtActionResult(nameof(GetCommentById), "Comments", new { postId = postId, commentId = comment.Id }, comment);
 				
         }
@@ -51,10 +48,6 @@ namespace SocialNetwork.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public ActionResult GetCommentById([FromRoute]int postId, int commentId)
 		{
-            var builder = new DbContextOptionsBuilder<SocialNetworkContext>()
-                .UseSqlite("DataSource=socialnetwork.db");
-            var context = new SocialNetworkContext(builder.Options);
-            context.Database.EnsureCreated();
             var post = context.Posts.FirstOrDefault(x => x.Id == postId);
             if (post is null)
             {

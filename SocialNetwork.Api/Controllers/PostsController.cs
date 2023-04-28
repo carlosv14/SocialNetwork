@@ -8,6 +8,13 @@ namespace SocialNetwork.Api.Controllers
 	[ApiController]
 	public class PostsController : ControllerBase
 	{
+        private readonly SocialNetworkContext context;
+
+        public PostsController(SocialNetworkContext context)
+        {
+            this.context = context;
+        }
+
         //http://localhost:4000/posts/43jkgdsggsdj
         /// <summary>
         /// Agrega una publicación para el usuario.
@@ -20,10 +27,6 @@ namespace SocialNetwork.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult AddPost([FromRoute]int userId, [FromBody]Post post)
         {
-            var builder = new DbContextOptionsBuilder<SocialNetworkContext>()
-                .UseSqlite("DataSource=socialnetwork.db");
-            var context = new SocialNetworkContext(builder.Options);
-            context.Database.EnsureCreated();
             var user = context.Users.FirstOrDefault(x => x.Id == userId);
             if (user is null)
             {
@@ -36,6 +39,7 @@ namespace SocialNetwork.Api.Controllers
             }
 
             context.Posts.Add(post);
+            context.SaveChanges();
             return new CreatedAtActionResult("GetPostById", "Posts", new { userId = userId, postId = post.Id }, post);
         }
 
@@ -44,10 +48,6 @@ namespace SocialNetwork.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult GetPosts([FromRoute] int userId)
         {
-            var builder = new DbContextOptionsBuilder<SocialNetworkContext>()
-               .UseSqlite("DataSource=socialnetwork.db");
-            var context = new SocialNetworkContext(builder.Options);
-            context.Database.EnsureCreated();
             var user = context.Users.FirstOrDefault(x => x.Id == userId);
             if (user is null)
             {
@@ -63,10 +63,6 @@ namespace SocialNetwork.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetPostById([FromRoute] int userId, int postId)
         {
-            var builder = new DbContextOptionsBuilder<SocialNetworkContext>()
-              .UseSqlite("DataSource=socialnetwork.db");
-            var context = new SocialNetworkContext(builder.Options);
-            context.Database.EnsureCreated();
             var user = context.Users.FirstOrDefault(x => x.Id == userId);
             if (user is null)
             {

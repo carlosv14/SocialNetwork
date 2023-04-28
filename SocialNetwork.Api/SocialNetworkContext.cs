@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Api.DatabaseConfiguration;
 using SocialNetwork.Api.Models;
 
 namespace SocialNetwork.Api
@@ -19,59 +20,9 @@ namespace SocialNetwork.Api
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasKey(x => x.Id);
-
-            modelBuilder.Entity<User>()
-                .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<User>()
-                .Property(x => x.Username)
-                .IsRequired();
-
-            modelBuilder.Entity<User>()
-               .Property(x => x.Name)
-               .IsRequired();
-
-            modelBuilder.Entity<User>()
-               .HasMany(x => x.Posts)
-               .WithOne(x => x.User)
-               .HasForeignKey(x => x.UserId);
-
-            modelBuilder.Entity<User>()
-                .HasMany(x => x.Comments)
-                .WithOne(x => x.User)
-                .HasForeignKey(x => x.UserId);
-
-
-            modelBuilder.Entity<Post>()
-                .HasKey(x => x.Id);
-
-            modelBuilder.Entity<Post>()
-                .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<Post>()
-                .Property(x => x.Content)
-                .IsRequired();
-
-            modelBuilder.Entity<Post>()
-                .HasMany(x => x.Comments)
-                .WithOne(x => x.Post)
-                .HasForeignKey(x => x.PostId);
-
-            modelBuilder.Entity<Comment>()
-                .HasKey(x => x.Id);
-
-            modelBuilder.Entity<Comment>()
-                .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<Comment>()
-                .Property(x => x.Content)
-                .IsRequired();
-
+            modelBuilder.ApplyConfiguration<User>(new UserEntityConfiguration());
+            modelBuilder.ApplyConfiguration<Comment>(new CommentEntityConfiguration());
+            modelBuilder.ApplyConfiguration<Post>(new PostEntityConfiguration());
         }
     }
 }

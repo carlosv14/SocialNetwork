@@ -25,8 +25,12 @@
 
   <ItemGroup>
     <None Remove="Models\" />
+    <None Remove="DatabaseConfiguration\" />
+    <None Remove="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="DatabaseConfiguration\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 </Project>
