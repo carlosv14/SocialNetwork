@@ -9,7 +9,7 @@ namespace SocialNetwork.Api.Models
 
 		public string Username { get; set; }
 
-		public string? Email { get; set; }
+		public string Email { get; set; }
 
 		public ICollection<Post> Posts { get; set; } = new HashSet<Post>();
 

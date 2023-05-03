@@ -27,10 +27,12 @@
     <None Remove="Models\" />
     <None Remove="DatabaseConfiguration\" />
     <None Remove="Repositories\" />
+    <None Remove="DataTransferObjects\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="DatabaseConfiguration\" />
     <Folder Include="Repositories\" />
+    <Folder Include="DataTransferObjects\" />
   </ItemGroup>
 </Project>
