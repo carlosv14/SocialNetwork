@@ -2,7 +2,10 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Api;
-using SocialNetwork.Api.Repositories;
+using SocialNetwork.Core.Interfaces;
+using SocialNetwork.Infrastructure;
+using SocialNetwork.Infrastructure.EntityFramework;
+using SocialNetwork.Infrastructure.EntityFramework.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,7 @@ builder.Services.AddDbContext<SocialNetworkContext>(options =>
 );
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<ICommentService, CommentService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

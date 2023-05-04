@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Api.DataTransferObjects;
-using SocialNetwork.Api.Models;
-using SocialNetwork.Api.Repositories;
+using SocialNetwork.Core.Entities;
+using SocialNetwork.Core.Interfaces;
 
 namespace SocialNetwork.Api.Controllers;
 

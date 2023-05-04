@@ -657,6 +657,43 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "SocialNetwork.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/SocialNetwork.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SocialNetwork.Core.dll": {}
+        }
+      },
+      "SocialNetwork.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "SocialNetwork.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SocialNetwork.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SocialNetwork.Infrastructure.dll": {}
+        }
+      },
+      "SocialNetwork.Infrastructure.EntityFramework/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.5",
+          "SocialNetwork.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SocialNetwork.Infrastructure.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SocialNetwork.Infrastructure.EntityFramework.dll": {}
+        }
       }
     }
   },
@@ -1703,6 +1740,21 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "SocialNetwork.Core/1.0.0": {
+      "type": "project",
+      "path": "../SocialNetwork.Core/SocialNetwork.Core.csproj",
+      "msbuildProject": "../SocialNetwork.Core/SocialNetwork.Core.csproj"
+    },
+    "SocialNetwork.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../SocialNetwork.Infrastructure/SocialNetwork.Infrastructure.csproj",
+      "msbuildProject": "../SocialNetwork.Infrastructure/SocialNetwork.Infrastructure.csproj"
+    },
+    "SocialNetwork.Infrastructure.EntityFramework/1.0.0": {
+      "type": "project",
+      "path": "../SocialNetwork.Infrastructure.EntityFramework/SocialNetwork.Infrastructure.EntityFramework.csproj",
+      "msbuildProject": "../SocialNetwork.Infrastructure.EntityFramework/SocialNetwork.Infrastructure.EntityFramework.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1711,6 +1763,9 @@
       "Microsoft.EntityFrameworkCore >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Sqlite >= 7.0.5",
+      "SocialNetwork.Core >= 1.0.0",
+      "SocialNetwork.Infrastructure >= 1.0.0",
+      "SocialNetwork.Infrastructure.EntityFramework >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
@@ -1739,7 +1794,17 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/cvare/Projects/SocialNetwork/SocialNetwork.Core/SocialNetwork.Core.csproj": {
+              "projectPath": "/Users/cvare/Projects/SocialNetwork/SocialNetwork.Core/SocialNetwork.Core.csproj"
+            },
+            "/Users/cvare/Projects/SocialNetwork/SocialNetwork.Infrastructure.EntityFramework/SocialNetwork.Infrastructure.EntityFramework.csproj": {
+              "projectPath": "/Users/cvare/Projects/SocialNetwork/SocialNetwork.Infrastructure.EntityFramework/SocialNetwork.Infrastructure.EntityFramework.csproj"
+            },
+            "/Users/cvare/Projects/SocialNetwork/SocialNetwork.Infrastructure/SocialNetwork.Infrastructure.csproj": {
+              "projectPath": "/Users/cvare/Projects/SocialNetwork/SocialNetwork.Infrastructure/SocialNetwork.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -1,5 +1,4 @@
 ﻿using System;
-using SocialNetwork.Api.Models;
 
 namespace SocialNetwork.Api.DataTransferObjects
 {
